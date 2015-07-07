@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Contact List App</title>
+		<link href="styles/book.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body ng-app="app">
+
+		<div ng-controller="BooksController as books">
+			<h1>Hello {{books.appName}}!</h1>
+
+			<h3>All Books</h3>
+			<ul>
+				<li ng-repeat="book in books.allBooks">
+					{{book.id}} - {{book.title}}
+				</li>
+			</ul>
+
+			<h3>All Readers</h3>
+			<ul>
+				<li ng-repeat="reader in books.allReader">
+					{{reader.id}} - {{reader.name}} -> {{books.getBadge(reader.totalReadHours)}}
+				</li>
+			</ul>
+		</div>
+
+		<script src="js/libs/angular/angular.min.js"></script>
+		<script src="app/app.js"></script>
+		<script src="app/books/booksController.js"></script>
+		<script src="app/services/dataService.js"></script>
+		<script src="app/services/loggerService.js"></script>
+		<script src="app/services/constantService.js"></script>
+		<script src="app/services/badgeService.js"></script>
+	</body>
+</html>
