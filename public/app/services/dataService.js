@@ -1,5 +1,7 @@
 ( function() {
-		angular.module('app').factory('dataService', ['$q', '$timeout', 'logger', dataService]);
+		angular.module('app').factory('dataService', dataService);
+	
+		dataService.$inject = ['$q', '$timeout', 'logger'];
 
 		function dataService($q, $timeout, logger) {
 			return {
@@ -55,5 +57,5 @@
 		}
 
 
-		dataService.$inject = ['logger'];
+		
 	}());
