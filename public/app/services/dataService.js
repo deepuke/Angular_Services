@@ -9,13 +9,24 @@
 				logger.output("Get all books");
 				var booksArray = [{
 					id : 1,
-					title : "Learn Node.JS"
+					title : "Learn Node.JS",
+					author : "Henry Mills",
+					genre : "Non Fiction"
 				}, {
 					id : 2,
-					title : "Angular JS for Absolute Beginners"
+					title : "Angular JS for Absolute Beginners",
+					author : "John Papa",
+					genre : "Non Fiction"
 				}, {
 					id : 3,
-					title : "Fundamentals of OOPs JavaScript"
+					title : "Fundamentals of OOPs JavaScript",
+					author : "O\'Relly",
+					genre : "Non Fiction"
+				},{
+					id : 4,
+					title : "100 Days of love",
+					author : "Mark Antony",
+					genre : "Fiction"
 				}],
 				    deferred = $q.defer();
 

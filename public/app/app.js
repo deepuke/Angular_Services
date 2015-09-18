@@ -29,14 +29,31 @@
 			booksProvider.setIncludeVersionInTitle(true);
 
 			$routeProvider.when('/', {
-				templateUrl : '/app/templates/home.html',
+				templateUrl : 'app/templates/books.html',
 				controller : 'BooksController',
-				controllerAs : 'book'
+				controllerAs : 'books'
+				
 			}).when('/addBook', {
-				templateUrl : '/app/templates/addBook.html',
+				templateUrl : 'app/templates/addBook.html',
 				controller : 'AddBookController',
 				controllerAs : 'ctrl'
+				
+			}).when('/editBook/:bookID', {
+				templateUrl : 'app/templates/editBook.html',
+				controller : 'EditBookController',
+				controllerAs : 'editBook',
+				resolve : {
+					books : function(dataService){
+						return dataService.getAllBooks();
+					}
+				}
 			}).otherwise('/');
+		}]);
+		
+		app.run(['$rootScope', function($rootScope){
+			$rootScope.$on('$routeChangeSuccess', function(event, current, previous){
+				console.log('Successfully changed routes');
+			});
 		}]);
 
 	}());

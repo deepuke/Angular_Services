@@ -1,11 +1,11 @@
 <h3>All Books</h3>
 <ul>
 	<li ng-repeat="book in books.allBooks">
-		{{book.id}} - {{book.title}}
+		{{book.id}} - {{book.title}} - <a href="#/editBook/{{book.id}}" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
 	</li>
 </ul>
 
-<a href="#/addBook">Add Book</a>
+<a href="#/addBook" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-plus"></i> Add Book</a>
 
 <h3>All Readers</h3>
 <ul>
