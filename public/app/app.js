@@ -1,12 +1,12 @@
 ( function() {
-		var app = angular.module('app', []);
+		var app = angular.module('app', ['ngRoute']);
 
 		app.provider('books', ["constants",
 		function(constants) {
 			this.$get = function() {
-				var appName = constants.APP_TITLE;
-				var appDesc = constants.APP_DESCRIPTION;
-				var version = constants.APP_VERSION;
+				var appName = constants.APP_TITLE,
+				    appDesc = constants.APP_DESCRIPTION,
+				    version = constants.APP_VERSION;
 
 				if (includeVersionInTitle) {
 					appName += " " + version;
@@ -24,9 +24,19 @@
 			};
 		}]);
 
-		app.config(["booksProvider",
-		function(booksProvider) {
+		app.config(['booksProvider', '$routeProvider',
+		function(booksProvider, $routeProvider) {
 			booksProvider.setIncludeVersionInTitle(true);
+
+			$routeProvider.when('/', {
+				templateUrl : '/app/templates/home.html',
+				controller : 'BooksController',
+				controllerAs : 'book'
+			}).when('/addBook', {
+				templateUrl : '/app/templates/addBook.html',
+				controller : 'AddBookController',
+				controllerAs : 'ctrl'
+			}).otherwise('/');
 		}]);
 
 	}());

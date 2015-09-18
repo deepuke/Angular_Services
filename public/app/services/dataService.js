@@ -1,13 +1,9 @@
 ( function() {
 		angular.module('app').factory('dataService', dataService);
-	
+
 		dataService.$inject = ['$q', '$timeout', 'logger'];
 
 		function dataService($q, $timeout, logger) {
-			return {
-				getAllBooks : getAllBooks,
-				getAllReaders : getAllReaders
-			};
 
 			function getAllBooks() {
 				logger.output("Get all books");
@@ -20,26 +16,26 @@
 				}, {
 					id : 3,
 					title : "Fundamentals of OOPs JavaScript"
-				}];
+				}],
+				    deferred = $q.defer();
 
-				var deferred = $q.defer();
 				$timeout(function() {
 					var successful = true;
-					if(successful){
+					if (successful) {
 						deferred.notify("Just getting started, gathering books...");
 						deferred.notify("Almost done gathering books...");
 						deferred.resolve(booksArray);
 					} else {
 						deferred.reject('Error retrieving books');
 					}
-				}, 1500);
+				}, 1000);
 
 				return deferred.promise;
 			}
 
 			function getAllReaders() {
 				logger.output("Get all readers");
-				return [{
+				var allReaders = [{
 					id : 1,
 					name : "Deepu",
 					totalReadHours : 5001
@@ -51,11 +47,29 @@
 					id : 3,
 					name : "Leena",
 					totalReadHours : 500
-				}];
+				}],
+				    deferred = $q.defer();
+				    
+				$timeout(function() {
+					var successful = true;
+
+					if (successful) {
+						deferred.notify("Almost done gathering readers...");
+						deferred.resolve(allReaders);
+					} else {
+						deferred.reject("Error retrieving readers");
+					}
+				}, 1500);
+
+				return deferred.promise;
+
 			}
+
+			return {
+				getAllBooks : getAllBooks,
+				getAllReaders : getAllReaders
+			};
 
 		}
 
-
-		
 	}());

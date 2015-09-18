@@ -1,36 +1,31 @@
 ( function() {
-		angular.module('app').controller('BooksController', ["books", "dataService", "logger", "badgeService", BooksController]);
+		angular.module('app').controller('BooksController', BooksController);
+		BooksController.$inject = ["books", "dataService", "logger", "badgeService", "$q"];
+		function BooksController(books, dataService, logger, badgeService, $q) {
+			var vm = this,
+			    bookPromise = dataService.getAllBooks(),
+			    readerPromise = dataService.getAllReaders();
 
-		function BooksController(books, dataService, logger, badgeService) {
-			var vm = this;
+			$q.all([bookPromise, readerPromise]).then(function(result) {
+				console.log(result);
+				vm.allBooks = result[0];
+				vm.allReaders = result[1];
+			}).catch(errorCallback).finally(completeCallback);
+
+			function errorCallback(errMsg) {
+				console.log(errMsg);
+			}
+
+			function completeCallback() {
+				console.log("All promise has competed");
+			}
+
+
 			vm.appName = books.appName;
-
-			//vm.allBooks = dataService.getAllBooks();
-			dataService.getAllBooks().then(getBooksSuccess, null, getBooksNotification).catch(errorCallback);
-			function getBooksSuccess(books) {				
-				vm.allBooks = books;
-			}
-			function errorCallback(errorMsg){
-				console.log("Error Msg : "+ errorMsg);
-			}	
-			/*
-			function getBooksError(reason) {
-							console.log(reason);
-						}
-			*/
-			
-			function getBooksNotification(notification) {
-				console.log("Promise Notification : " + notification);
-			}
-
-
-			vm.allReader = dataService.getAllReaders();
 
 			vm.getBadge = badgeService.retrieveBadge;
 
 			logger.output("Testing 123!");
-
-			console.log(vm);
 
 		}
 
