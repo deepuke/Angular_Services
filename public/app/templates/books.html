@@ -6,6 +6,7 @@
 </ul>
 
 <a href="#/addBook" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-plus"></i> Add Book</a>
+<a href="#/editBook/{{books.lastEditedBook.id}}" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-saved"></i> Last Edited</a>
 
 <h3>All Readers</h3>
 <ul>
@@ -13,3 +14,5 @@
 		{{reader.id}} - {{reader.name}} -> {{books.getBadge(reader.totalReadHours)}}
 	</li>
 </ul>
+
+<h3>Favorite Book : {{books.favoriteBook}}</h3>
