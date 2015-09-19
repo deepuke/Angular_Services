@@ -1,13 +1,13 @@
 ( function() {
 		var app = angular.module('app', ['ngRoute', 'ngCookies']);
 
-		app.provider('books', ["constants",
+		app.provider('books', ['constants',
 		function(constants) {
 			this.$get = function() {
 				var appName = constants.APP_TITLE, appDesc = constants.APP_DESCRIPTION, version = constants.APP_VERSION;
 
 				if (includeVersionInTitle) {
-					appName += " " + version;
+					appName += ' ' + version;
 				}
 
 				return {
@@ -22,8 +22,10 @@
 			};
 		}]);
 
-		app.config(['booksProvider', '$routeProvider',
-		function(booksProvider, $routeProvider) {
+		app.config(['booksProvider', '$routeProvider', '$logProvider',
+		function(booksProvider, $routeProvider, $logProvider) {
+			
+			$logProvider.debugEnabled(false);
 			booksProvider.setIncludeVersionInTitle(true);
 
 			$routeProvider.when('/', {
@@ -39,12 +41,7 @@
 			}).when('/editBook/:bookID', {
 				templateUrl : 'app/templates/editBook.html',
 				controller : 'EditBookController',
-				controllerAs : 'editBook',
-				resolve : {
-					books : function(dataService) {
-						return dataService.getAllBooks();
-					}
-				}
+				controllerAs : 'editBook'
 			}).otherwise('/');
 		}]);
 
