@@ -12,8 +12,17 @@
 				headers : {
 				'XX-T2Head' : 'Deepu',
 				'PS-BookLogger-Version' : constants.APP_VERSION
-				}
+				},
+				transformResponse : transformGetBooks,
 				}).then(sendResponseData).catch(sendGetBooksError);
+			}
+			
+			function transformGetBooks(data, headerGetter, status){
+				var transformed = angular.fromJson(data);
+				transformed.forEach(function(currentValue, index, array){
+					currentValue.downLoaded = new Date();
+				});
+				return transformed;
 			}
 
 			function getBookByID(bookID) {
@@ -63,10 +72,17 @@
 				headers : {
 				'XX-T2Head' : 'Deepu',
 				'PS-BookLogger-Version' : constants.APP_VERSION
-				}
+				},
+				transformRequest : transformPostReq,
 				}).then(addBookSuccess).catch(addBookError);
 			}
-
+			
+			function transformPostReq(data, headerGetter){
+				data.newBook = true;
+				console.log(data);
+				return JSON.stringify(data);
+			}
+			
 			function addBookSuccess(response) {
 				return 'Added new book : ' + response.config.data.title;
 			}
