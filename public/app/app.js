@@ -1,5 +1,5 @@
 ( function() {
-		var app = angular.module('app', ['ngRoute', 'ngCookies']);
+		var app = angular.module('app', ['ngRoute', 'ngCookies', 'ngResource']);
 
 		app.provider('books', ['constants',
 		function(constants) {
@@ -24,7 +24,7 @@
 
 		app.config(['booksProvider', '$routeProvider', '$logProvider', '$httpProvider',
 		function(booksProvider, $routeProvider, $logProvider, $httpProvider) {
-			
+
 			$logProvider.debugEnabled(false);
 			booksProvider.setIncludeVersionInTitle(true);
 			//$httpProvider.interceptors.push('bookLoggerInterceptor');
@@ -39,7 +39,7 @@
 				controller : 'AddBookController',
 				controllerAs : 'ctrl'
 
-			}).when('/editBook/:bookID', {
+			}).when('/editBook/:bookId', {
 				templateUrl : 'app/templates/editBook.html',
 				controller : 'EditBookController',
 				controllerAs : 'editBook'
