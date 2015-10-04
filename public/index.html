@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Contact List App</title>
-		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-		<link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
-		<link href="styles/book.css" rel="stylesheet" type="text/css" />
-	</head>
-	<body ng-app="app">
 
-		<div class="container">
-			<h1>Book Logger</h1>
-			<div ng-view></div>
-		</div>
+<head>
+    <title>Contact List App</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+    <link href="styles/book.css" rel="stylesheet" type="text/css" />
+</head>
 
-		<script src="bower_components/angular/angular.js"></script>
-		<script src="bower_components/angular-route/angular-route.js"></script>
-		<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-		<script src="bower_components/angular-resource/angular-resource.js"></script>
+<body ng-app="app">
 
-		<script src="app/app.js"></script>
+    <div class="container">
+        <h1>Book Logger</h1>
+        <div ng-view></div>
+    </div>
 
-		<script src="app/books/booksController.js"></script>
-		<script src="app/books/addBookController.js"></script>
-		<script src="app/books/editBookController.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
 
-		<script src="app/services/dataService.js"></script>
-		<script src="app/services/loggerService.js"></script>
-		<script src="app/services/constantService.js"></script>
-		<script src="app/services/badgeService.js"></script>
-		<script src="app/services/bookLoggerInterceptor.js"></script>
-		<script src="app/services/booksResource.js"></script>
-	</body>
+    <script src="app/app.js"></script>
+
+    <script src="app/books/booksController.js"></script>
+    <script src="app/books/addBookController.js"></script>
+    <script src="app/books/editBookController.js"></script>
+
+    <script src="app/services/dataService.js"></script>
+    <script src="app/services/loggerService.js"></script>
+    <script src="app/services/constantService.js"></script>
+    <script src="app/services/badgeService.js"></script>
+    <script src="app/services/bookLoggerInterceptor.js"></script>
+    <script src="app/services/booksResource.js"></script>
+
+    <script src="app/filters/bookFilters.js"></script>
+</body>
+
 </html>

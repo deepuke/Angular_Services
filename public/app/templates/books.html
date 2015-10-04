@@ -2,27 +2,30 @@
 
 <div class="row">
 
-	<div class="col-sm-3" ng-repeat="book in books.allBooks">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				{{book.title}}
-				<span class="pull-right">
+    <div class="col-sm-4" ng-repeat="book in books.allBooks | orderBy : 'createdDate'">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{book.title}}
+                <span class="pull-right">
 					<a href="#/editBook/{{book._id}}" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
 					<a ng-click="books.deleteBook(book._id)" href="" title="Delete Book"><i class="glyphicon glyphicon-remove"></i></a>
 				</span>
-			</div>
-			<div class="panel-body">
-				<ul class="list-group">
-					<li class="list-group-item">
-						Author : {{book.author}}
-					</li>
-					<li class="list-group-item">
-						Genre : {{book.genre}}
-					</li>
-				</ul>				
-			</div>
-		</div>
-	</div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        Author : {{book.author}}
+                    </li>
+                    <li class="list-group-item">
+                        Genre : {{book.genre}}
+                    </li>
+                    <li class="list-group-item">
+                        Created Date : {{book.createdDate | dateFilter}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 <a href="#/addBook" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-plus"></i> Add Book</a>
@@ -30,9 +33,9 @@
 
 <h3>All Readers</h3>
 <ul>
-	<li ng-repeat="reader in books.allReaders">
-		{{reader.id}} - {{reader.name}} -> {{books.getBadge(reader.totalReadHours)}}
-	</li>
+    <li ng-repeat="reader in books.allReaders">
+        {{reader.id}} - {{reader.name}} -> {{books.getBadge(reader.totalReadHours)}}
+    </li>
 </ul>
 
 <h3 ng-if="books.favoriteBook">Favorite Book : {{books.favoriteBook}}</h3>

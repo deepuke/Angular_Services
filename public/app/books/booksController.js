@@ -1,59 +1,62 @@
-( function() {
+(function () {
 
-		angular.module('app').controller('BooksController', BooksController);
+    angular.module('app').controller('BooksController', BooksController);
 
-		BooksController.$inject = ['books', 'dataService', 'logger', 'badgeService', '$q', '$cookies', '$cookieStore', '$log', '$route', 'BooksResource'];
+    BooksController.$inject = ['books', 'dataService', 'logger', 'badgeService', '$q', '$cookies', '$cookieStore', '$log', '$route', 'BooksResource'];
 
-		function BooksController(books, dataService, logger, badgeService, $q, $cookies, $cookieStore, $log, $route, BooksResource) {
-			var vm = this;
+    function BooksController(books, dataService, logger, badgeService, $q, $cookies, $cookieStore, $log, $route, BooksResource) {
+        var vm = this;
 
-			//dataService.getAllBooks().then(getBookSuccess).catch(errorCallback);
+        //dataService.getAllBooks().then(getBookSuccess).catch(errorCallback);
 
-			vm.allBooks = BooksResource.query();
-			function getBookSuccess(books) {
-				console.log(books);
-				vm.allBooks = books;
-			}
+        vm.allBooks = BooksResource.query();
 
-
-			dataService.getAllReaders().then(getReaderSuccss).catch(errorCallback);
-			function getReaderSuccss(readers) {
-				vm.allReaders = readers;
-			}
+        function getBookSuccess(books) {
+            console.log(books);
+            vm.allBooks = books;
+        }
 
 
-			vm.deleteBook = function(bookID) {
+        dataService.getAllReaders().then(getReaderSuccss).catch(errorCallback);
 
-				dataService.deleteBook(bookID).then(deleteBookSuccess).catch(errorCallback);
-			};
-			function deleteBookSuccess(msg) {
-				$log.info('msg');
-				$route.reload();
-			}
-
-			function errorCallback(errMsg) {
-				console.log(errMsg);
-			}
-
-			function completeCallback() {
-				console.log('All promise has competed');
-			}
+        function getReaderSuccss(readers) {
+            vm.allReaders = readers;
+        }
 
 
-			vm.appName = books.appName;
-			vm.getBadge = badgeService.retrieveBadge;
+        vm.deleteBook = function (bookID) {
 
-			vm.favoriteBook = $cookies.favoriteBook;
+            dataService.deleteBook(bookID).then(deleteBookSuccess).catch(errorCallback);
+        };
 
-			vm.lastEditedBook = $cookieStore.get('lastEdited');
+        function deleteBookSuccess(msg) {
+            $log.info('msg');
+            $route.reload();
+        }
 
-			/*
-			 $log.log('logging with log');
-			 $log.info('logging with info');
-			 $log.warn('logging with warn');
-			 $log.error('logging with error');
-			 $log.debug('logging with debug');*/
+        function errorCallback(errMsg) {
+            console.log(errMsg);
+        }
 
-		}
+        function completeCallback() {
+            console.log('All promise has competed');
+        }
 
-	}());
+
+        vm.appName = books.appName;
+        vm.getBadge = badgeService.retrieveBadge;
+
+        vm.favoriteBook = $cookies.favoriteBook;
+
+        vm.lastEditedBook = $cookieStore.get('lastEdited');
+
+        /*
+         $log.log('logging with log');
+         $log.info('logging with info');
+         $log.warn('logging with warn');
+         $log.error('logging with error');
+         $log.debug('logging with debug');*/
+
+    }
+
+}());
