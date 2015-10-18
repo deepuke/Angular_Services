@@ -16,7 +16,6 @@
             vm.allBooks = books;
         }
 
-
         dataService.getAllReaders().then(getReaderSuccss).catch(errorCallback);
 
         function getReaderSuccss(readers) {
